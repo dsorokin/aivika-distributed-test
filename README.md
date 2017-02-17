@@ -16,7 +16,7 @@ The code is written in Haskell. In the simplest case you need [Stack] [2] instal
 Download the test code from GitHub on all your nodes:
 
 ```
-$ git clone git@github.com:dsorokin/aivikasim-distributed-test.git
+$ git clone https://github.com/dsorokin/aivikasim-distributed-test.git
 $ cd aivikasim-distributed-test
 ```
 
