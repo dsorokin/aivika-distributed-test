@@ -153,10 +153,7 @@ Whatever cluster you build, how many times you run the simulation, you should al
 
 In my case I receive the following results:
 
-```
-The result is (0.6174488980632207,0.6666666666666666)
-
-```
+`The result is (0.6174488980632207,0.6666666666666666)`
 
 It is possible thanks to the fact that the distributed simulation model uses pseudo-random generators with the predefined seed.
 
