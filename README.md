@@ -1,4 +1,166 @@
 This test project defines a distributed discrete event simulation model for [aivikasim-distributed] [1].
 It should return the same reproducible results on computers with the same architecture whatever cluster you create.
 
+## How to Test
+
+The following test can be repeated on Windows, Linux and macOS. Possibly, it can be repeated on other operating systems too that have the Haskell compiler.
+
+### Prerequisites
+
+To repeat the test, you need a small simulation cluster. It can be either a single computer, i.e. `localhost`, or a true small cluster consisting of up to 4 different computers.
+
+The code is written in Haskell. In the simplest case you need [Stack] [2] installed on your nodes of the future cluster.
+
+### Downloading from GitHub
+
+Download the test code from GitHub on all your nodes:
+
+```
+$ git clone git@github.com:dsorokin/aivikasim-distributed-test.git
+$ cd aivikasim-distributed-test
+```
+
+### Defining the Cluster Topology
+
+Now you have to define the topology of the cluster. In other words, you have to decide, where the simulation nodes will be located and which ports they will listen to. By the way, the ports must be open. The most simple simple way is to create a local network.
+
+You have to edit the `cluster.conf` file on every node of the cluster.
+
+For example, I decided to use two laptops connected via the ethernet cable in a local network. The first laptop works under macOS and has IP address 192.168.99.20. The second laptop works under Linux and has IP address 192.168.99.10.
+
+But if you decide to repeat the simulation experiment on one physical computer, then you can define the IP address as `localhost`. It will work too.
+
+In my case the `cluster.conf` file has the following contents:
+
+```
+# The Simulation Cluster Configuration
+
+# 0: the master simulation node, which must be run last
+192.168.99.20:8088
+
+# 1: the time server
+192.168.99.20:8080
+
+# 2: the first slave simulation node
+192.168.99.10:8081
+
+# 3: the second slave simulation node
+192.168.99.10:8082
+```
+
+Here nodes 0 and 1 are located on the laptop with IP address 192.168.99.20. The nodes 2 and 3 are located on another laptop with address 192.168.99.10. 
+
+In this specific test, the first two nodes have a special meaning. The first node is a master node, which must be run strongly in the last order. The second node will be used for running a specialized local process that will play a role of the Time Server.
+
+### Building the Test Executable
+
+For the first time, you will have to set up the Stack project. In the next time, you should not do it anymore.
+
+`$ stack setup`
+
+In the beginning and after each change of the `cluster.conf` configuration file, you have to build a binary executable anew.
+
+`$ stack build`
+
+It must be done on every node of the simulation cluster.
+
+### Running the Time Server
+
+Here in this test the Time Server is located on node 1. In my case I run it on the laptop with IP address 192.168.99.20.
+
+`$ stack exec aivikasim-distributed-test slave 1`
+
+### Running Auxiliary Simulation Nodes
+
+Now the time is to run the auxiliary simulation nodes. In my case they are located on the laptop with IP address 192.168.99.10.
+
+So, I type in one Terminal window:
+
+`$ stack exec aivikasim-distributed-test slave 2`
+
+Then I repeat in another Terminal window:
+
+`$ stack exec aivikasim-distributed-test slave 3`
+
+### Launching the Simulation
+
+Now I will run the distributed simulation on my cluster. I switch to the first laptop with IP address 192.168.99.20 and type in the Terminal window:
+
+`$ stack exec aivikasim-distributed-test master 0`
+
+The simulation must be started, which we can see in the Terminal window, where node 1 was launched. If you remember, that was the Time Server. You should see something like this:
+
+```
+$ stack exec aivikasim-distributed-test slave 1
+-- time --: [INFO] Time Server: starting...
+-- time --: [DEBUG] Time Server: RegisterLocalProcessMessage pid://192.168.99.10:8081:0:24
+-- time --: [INFO] Time Server: monitoring the process by identifier pid://192.168.99.10:8081:0:24
+-- time --: [DEBUG] Time Server: RegisterLocalProcessMessage pid://192.168.99.20:8088:0:11
+-- time --: [INFO] Time Server: monitoring the process by identifier pid://192.168.99.20:8088:0:11
+-- time --: [DEBUG] Time Server: RegisterLocalProcessMessage pid://192.168.99.10:8082:0:24
+-- time --: [INFO] Time Server: monitoring the process by identifier pid://192.168.99.10:8082:0:24
+-- time --: [INFO] Time Server: starting
+-- time --: [DEBUG] Time Server: computing the global time...
+-- time --: [DEBUG] Time Server: LocalTimeMessage pid://192.168.99.10:8081:0:24 0.32450531421998324
+-- time --: [DEBUG] Time Server: LocalTimeMessage pid://192.168.99.20:8088:0:11 0.3245063142199832
+-- time --: [DEBUG] Time Server: LocalTimeMessage pid://192.168.99.10:8082:0:24 0.0
+-- time --: [INFO] Time Server: providing the global time = Just 0.0
+-- time --: [DEBUG] Time Server: computing the global time...
+-- time --: [DEBUG] Time Server: LocalTimeMessage pid://192.168.99.10:8082:0:24 0.40740346307920355
+-- time --: [DEBUG] Time Server: LocalTimeMessage pid://192.168.99.20:8088:0:11 5.978089191143517
+-- time --: [DEBUG] Time Server: LocalTimeMessage pid://192.168.99.10:8081:0:24 0.3245073142199832
+-- time --: [INFO] Time Server: providing the global time = Just 0.3245073142199832
+```
+
+Please pay attention to the fact that the global virtual time should decrease. It means that the distribution simulation has a progress.
+
+### Optional Imitating of Connection Errors
+
+AivikaSim is written in such a way that it tries to recover the distributed simulation in case of connection errors. It actually allows using AivikaSim to build discrete event simulation clusters on unsafe networks.
+
+Here I use macOS and Linux and I can imitate the temporary disconnection between my two laptops. I would not strongly recommend to repeat it if you use Windows, though.
+
+So, during the simulation I plug the ethernet cable off for about a minute. I wait for a moment, when I see that the disconnection has indeed occurred and cannot be recovered by the underlying system. 
+
+I should see something like this on the Terminal window of the master node:
+
+```
+$ stack exec aivikasim-distributed-test master 0
+Slaves: [nid://192.168.99.20:8080:0,nid://192.168.99.10:8081:0,nid://192.168.99.10:8082:0]
+-- time --: [WARNING] Received a process monitor notification ProcessMonitorNotification (MonitorRef {monitorRefIdent = pid://192.168.99.10:8081:0:19, monitorRefCounter = 1}) pid://192.168.99.10:8081:0:19 DiedDisconnect
+-- time --: [WARNING] Received a process monitor notification ProcessMonitorNotification (MonitorRef {monitorRefIdent = pid://192.168.99.10:8082:0:19, monitorRefCounter = 2}) pid://192.168.99.10:8082:0:19 DiedDisconnect
+-- time --: [WARNING] Received a process monitor notification ProcessMonitorNotification (MonitorRef {monitorRefIdent = pid://192.168.99.20:8080:0:13, monitorRefCounter = 0}) pid://192.168.99.20:8080:0:13 DiedDisconnect
+-- time --: [NOTICE] Begin reconnecting...
+-- time --: [NOTICE] Direct reconnecting to pid://192.168.99.10:8081:0:19
+-- time --: [NOTICE] Direct reconnecting to pid://192.168.99.10:8082:0:19
+-- time --: [NOTICE] Direct reconnecting to pid://192.168.99.20:8080:0:13
+-- time --: [NOTICE] Proceed to the re-monitoring
+-- time --: [NOTICE] Re-monitoring pid://192.168.99.10:8081:0:19
+-- time --: [NOTICE] Writing to the channel about reconnecting to pid://192.168.99.10:8081:0:19
+-- time --: [NOTICE] Re-monitoring pid://192.168.99.10:8082:0:19
+-- time --: [NOTICE] Writing to the channel about reconnecting to pid://192.168.99.10:8082:0:19
+-- time --: [NOTICE] Re-monitoring pid://192.168.99.20:8080:0:13
+-- time --: [NOTICE] Writing to the channel about reconnecting to pid://192.168.99.20:8080:0:13
+-- time --: [NOTICE] t = 1000.0: reconnecting to pid://192.168.99.10:8081:0:19...
+-- time --: [NOTICE] t = 1000.0: reconnecting to pid://192.168.99.10:8082:0:19...
+```
+
+After plugging the ethernet cable again, AivikaSim should recover the distributed simulation, where the global virtual time will increase again in the Terminal window of the Time Server.
+
+### Simulation Results
+
+Whatever cluster you build, how many times you run the simulation, you should always see the same final results if you use computers of the same architecture. The result is printed in the Terminal window of the master node.
+
+In my case I receive the following results:
+
+```
+The result is (0.6174488980632207,0.6666666666666666)
+
+```
+
+It is possible thanks to the fact that the distributed simulation model uses pseudo-random generators with the predefined seed.
+
+Finally, you can launch another simulation using the same Time Server and auxiliary nodes, i.e. the slave nodes, and running a new master node. The slave nodes should be shutdown explicitly, but they will behave like a service for each new simulation.
+
 [1]: http://www.aivikasoft.com/aivikasim/aivikasim-distributed  "aivikasim-distributed"
+[2]: http://docs.haskellstack.org/ "Stack"
