@@ -149,7 +149,7 @@ After plugging in the Ethernet cable, AivikaSim should recover the distributed s
 
 ### Simulation Results
 
-Whatever cluster you build, however many times you run the simulation, you should always see the same final results if you use computers of the same architecture. The result is printed in the Terminal window of the master node.
+Whatever cluster you build, however many times you run the simulation, you should always see the same final results if you are using computers of the same architecture. The result is printed in the Terminal window of the master node.
 
 In my case I receive the following results:
 
