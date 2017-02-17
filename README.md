@@ -48,7 +48,7 @@ In my case the `cluster.conf` file has the following contents:
 192.168.99.10:8082
 ```
 
-Here nodes 0 and 1 are located on the laptop with IP address 192.168.99.20. The nodes 2 and 3 are located on another laptop with IP address 192.168.99.10. 
+Here nodes 0 and 1 are located on the laptop with IP address 192.168.99.20. Nodes 2 and 3 are located on another laptop with IP address 192.168.99.10. 
 
 In this specific test, the first two nodes have a special meaning. The first node is a master node, which must be run strongly in the last order. The second node will be used for running a specialized local process that will play a role of the Time Server.
 
