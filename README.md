@@ -114,7 +114,7 @@ $ stack exec aivikasim-distributed-test slave 1
 
 Please pay attention to the fact that the global virtual time should increase. It means that the distribution simulation has a progress.
 
-### Optional Imitating of Connection Errors
+### Optional Imitating Connection Errors
 
 AivikaSim is written in such a way that it tries to recover the distributed simulation in case of connection errors. It actually allows using AivikaSim to build discrete event simulation clusters on unsafe networks.
 
