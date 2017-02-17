@@ -45,19 +45,23 @@ getMasterBackend i addrs rtable =
      backend <- initializeBackend host port rtable
      return (backend, slaves)
 
-getClusterConf :: IO String
-getClusterConf = readFile "cluster.conf"
+getClusterConf :: IO [String]
+getClusterConf = fmap addresses $ readFile "cluster.conf"
+
+addresses :: String -> [String]
+addresses =
+  filter (\x -> head x /= '#') .
+  filter (\x -> not $ null $ filter (\y -> y /= ' ') x) .
+  lines
 
 getSlaveConfBackend :: Int -> DP.RemoteTable -> IO Backend
 getSlaveConfBackend i rtable =
-  do contents <- getClusterConf
-     let addrs = lines contents
+  do addrs <- getClusterConf
      getSlaveBackend i addrs rtable
 
 getMasterConfBackend :: Int -> DP.RemoteTable -> IO (Backend, [DP.NodeId])
 getMasterConfBackend i rtable =
-  do contents <- getClusterConf
-     let addrs = lines contents
+  do addrs <- getClusterConf
      getMasterBackend i addrs rtable
 
 startMasterProcess :: Backend -> [DP.NodeId] -> (Backend -> [DP.NodeId] -> DP.Process ()) -> IO ()
