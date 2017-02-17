@@ -52,8 +52,8 @@ packages:
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps:
-- aivikasim-0.1
-- aivikasim-transformers-0.1
+- aivikasim-1.0
+- aivikasim-transformers-1.0
 - aivikasim-distributed-0.1
 
 # Override default flag values for local packages and extra-deps
