@@ -22,7 +22,7 @@ $ cd aivikasim-distributed-test
 
 ### Defining the Cluster Topology
 
-Now you have to define the topology of the cluster. In other words, you have to decide, where the simulation nodes will reside and which ports they will listen to. By the way, the ports must be open. The most simple simple way is to create a local network.
+Now you have to define the topology of the cluster. In other words, you have to decide, where the simulation nodes will reside and which ports they will listen to. By the way, the ports must be open. The most simple way is to create a local network.
 
 You have to edit the `cluster.conf` file on every node of the cluster.
 
@@ -48,11 +48,11 @@ In my case the `cluster.conf` file has the following contents:
 192.168.99.10:8082
 ```
 
-Here nodes 0 and 1 are located on the laptop with IP address 192.168.99.20. The nodes 2 and 3 are located on another laptop with address 192.168.99.10. 
+Here nodes 0 and 1 are located on the laptop with IP address 192.168.99.20. The nodes 2 and 3 are located on another laptop with IP address 192.168.99.10. 
 
 In this specific test, the first two nodes have a special meaning. The first node is a master node, which must be run strongly in the last order. The second node will be used for running a specialized local process that will play a role of the Time Server.
 
-### Building the Test Executable
+### Building the Binary Executable
 
 For the first time, you will have to set up the Stack project. In the next time, you should not do it anymore.
 
@@ -66,7 +66,7 @@ It must be done on every node of the simulation cluster.
 
 ### Running the Time Server
 
-Here in this test the Time Server is located on node 1. In my case I run it on the laptop with IP address 192.168.99.20.
+Here in the test the Time Server is located on node 1. In my case I run it on the laptop with IP address 192.168.99.20.
 
 `$ stack exec aivikasim-distributed-test slave 1`
 
@@ -112,15 +112,15 @@ $ stack exec aivikasim-distributed-test slave 1
 -- time --: [INFO] Time Server: providing the global time = Just 0.3245073142199832
 ```
 
-Please pay attention to the fact that the global virtual time should decrease. It means that the distribution simulation has a progress.
+Please pay attention to the fact that the global virtual time should increase. It means that the distribution simulation has a progress.
 
 ### Optional Imitating of Connection Errors
 
 AivikaSim is written in such a way that it tries to recover the distributed simulation in case of connection errors. It actually allows using AivikaSim to build discrete event simulation clusters on unsafe networks.
 
-Here I use macOS and Linux and I can imitate the temporary disconnection between my two laptops. I would not strongly recommend to repeat it if you use Windows, though.
+Here I use macOS and Linux and I can imitate the temporary disconnection between two my laptops. I would strongly recommend to not repeat it if you use Windows, though.
 
-So, during the simulation I plug the ethernet cable off for about a minute. I wait for a moment, when I see that the disconnection has indeed occurred and cannot be recovered by the underlying system. 
+So, during the simulation I plug the ethernet cable off for about one minute. I wait for a moment, when I see that the disconnection has indeed occurred and cannot be recovered by the underlying operating system. 
 
 I should see something like this on the Terminal window of the master node:
 
@@ -145,11 +145,11 @@ Slaves: [nid://192.168.99.20:8080:0,nid://192.168.99.10:8081:0,nid://192.168.99.
 -- time --: [NOTICE] t = 1000.0: reconnecting to pid://192.168.99.10:8082:0:19...
 ```
 
-After plugging the ethernet cable again, AivikaSim should recover the distributed simulation, where the global virtual time will increase again in the Terminal window of the Time Server.
+After plugging in the ethernet cable, AivikaSim should recover the distributed simulation, where the global virtual time will increase again in the Terminal window of the Time Server.
 
 ### Simulation Results
 
-Whatever cluster you build, how many times you run the simulation, you should always see the same final results if you use computers of the same architecture. The result is printed in the Terminal window of the master node.
+Whatever cluster you build, however many times you run the simulation, you should always see the same final results if you use computers of the same architecture. The result is printed in the Terminal window of the master node.
 
 In my case I receive the following results:
 
