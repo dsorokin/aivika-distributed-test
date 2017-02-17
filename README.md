@@ -22,7 +22,7 @@ $ cd aivikasim-distributed-test
 
 ### Defining the Cluster Topology
 
-Now you have to define the topology of the cluster. In other words, you have to decide, where the simulation nodes will be located and which ports they will listen to. By the way, the ports must be open. The most simple simple way is to create a local network.
+Now you have to define the topology of the cluster. In other words, you have to decide, where the simulation nodes will reside and which ports they will listen to. By the way, the ports must be open. The most simple simple way is to create a local network.
 
 You have to edit the `cluster.conf` file on every node of the cluster.
 
