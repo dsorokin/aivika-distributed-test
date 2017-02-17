@@ -118,7 +118,7 @@ Please pay attention to the fact that the global virtual time should increase. I
 
 AivikaSim is written in such a way that it tries to recover the distributed simulation in case of connection errors. It actually allows using AivikaSim to build discrete event simulation clusters on unsafe networks.
 
-Here I use macOS and Linux and I can imitate the temporary disconnection between two my laptops. I would strongly recommend to not repeat it if you use Windows, though.
+Here I use macOS and Linux and I can imitate the temporary disconnection between two my laptops. I would strongly recommend to not repeat it if you are using Windows, though.
 
 So, during the simulation I plug the Ethernet cable off for about one minute. I wait for a moment, when I see that the disconnection has indeed occurred and cannot be recovered by the underlying operating system. 
 
