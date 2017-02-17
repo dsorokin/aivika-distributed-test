@@ -112,7 +112,7 @@ $ stack exec aivikasim-distributed-test slave 1
 -- time --: [INFO] Time Server: providing the global time = Just 0.3245073142199832
 ```
 
-Please pay attention to the fact that the global virtual time should increase. It means that the distribution simulation has a progress.
+Please pay attention to the fact that the global virtual time should increase. It means that the distributed simulation has a progress.
 
 ### Optional Imitating Connection Errors
 
