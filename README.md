@@ -26,7 +26,7 @@ Now you have to define the topology of the cluster. In other words, you have to 
 
 You have to edit the `cluster.conf` file on every node of the cluster.
 
-For example, I decided to use two laptops connected via the ethernet cable in a local network. The first laptop works under macOS and has IP address 192.168.99.20. The second laptop works under Linux and has IP address 192.168.99.10.
+For example, I decided to use two laptops connected via the Ethernet cable in a local network. The first laptop works under macOS and has IP address 192.168.99.20. The second laptop works under Linux and has IP address 192.168.99.10.
 
 But if you decide to repeat the simulation experiment on one physical computer, then you can define the IP address as `localhost`. It will work too.
 
@@ -120,7 +120,7 @@ AivikaSim is written in such a way that it tries to recover the distributed simu
 
 Here I use macOS and Linux and I can imitate the temporary disconnection between two my laptops. I would strongly recommend to not repeat it if you use Windows, though.
 
-So, during the simulation I plug the ethernet cable off for about one minute. I wait for a moment, when I see that the disconnection has indeed occurred and cannot be recovered by the underlying operating system. 
+So, during the simulation I plug the Ethernet cable off for about one minute. I wait for a moment, when I see that the disconnection has indeed occurred and cannot be recovered by the underlying operating system. 
 
 I should see something like this on the Terminal window of the master node:
 
@@ -145,7 +145,7 @@ Slaves: [nid://192.168.99.20:8080:0,nid://192.168.99.10:8081:0,nid://192.168.99.
 -- time --: [NOTICE] t = 1000.0: reconnecting to pid://192.168.99.10:8082:0:19...
 ```
 
-After plugging in the ethernet cable, AivikaSim should recover the distributed simulation, where the global virtual time will increase again in the Terminal window of the Time Server.
+After plugging in the Ethernet cable, AivikaSim should recover the distributed simulation, where the global virtual time will increase again in the Terminal window of the Time Server.
 
 ### Simulation Results
 
