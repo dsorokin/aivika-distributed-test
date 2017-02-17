@@ -19,6 +19,8 @@ build-type:          Simple
 extra-source-files:  README.md
 cabal-version:       >=1.10
 
+data-files:          cluster.conf
+
 library
   hs-source-dirs:      src
   exposed-modules:     SimpleLocalnetHelper
