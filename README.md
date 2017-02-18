@@ -127,7 +127,7 @@ AivikaSim is written in such a way that it tries to recover the distributed simu
 
 Here I use macOS and Linux and I can imitate the temporary disconnection between two my laptops. I would strongly recommend to not repeat it if you are using Windows, though.
 
-So, during the simulation I plug the Ethernet cable off for about one minute. I wait for a moment, when I see that the disconnection has indeed occurred and cannot be recovered by the underlying operating system. 
+So, during the simulation I plug the Ethernet cable off for about one minute. I wait for a moment, when I see that the disconnection has indeed occurred and cannot be recovered by the underlying system. 
 
 I should see something like this on the Terminal window of the master node:
 
