@@ -6,7 +6,7 @@ It should return the same reproducible results on computers with the same archit
 
 ## What is Tested
 
-The test model is intentionally designed in such a way so that it would generate plenty of messages for stress testing the distributed module of AivikaSim. The most things could be done by using significantly more efficient discrete events and discontinuous processes supported by AivikaSim, but the heavy-weight external messages are used instead. There are many rollbacks and retries, when simulating. The goal is to test the underlying mechanism that provides with capabilities of the distributed discrete event simulation based on the optimistic Time Warp method.
+The test model is intentionally designed in such a way so that it would generate plenty of messages for stress testing the distributed module of AivikaSim. The most of things could be done by using significantly more efficient discrete events and discontinuous processes supported by AivikaSim, but the heavy-weight external messages are used instead. There are many rollbacks and retries, when simulating. The goal is to test the underlying mechanism that provides with capabilities of the distributed discrete event simulation based on the optimistic Time Warp method.
 
 ## How to Test
 
