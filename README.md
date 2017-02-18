@@ -16,7 +16,7 @@ The following test can be repeated on Windows, Linux and macOS. Possibly, it can
 
 To repeat the test, you need a small simulation cluster. It can be either a single computer, i.e. `localhost`, or a true small cluster consisting of up to 4 different computers.
 
-The code is written in Haskell. In the simplest case you need [Stack] [2] installed on your nodes of the future cluster. To reproduce the test, you don't need to know the Haskell programming language.
+The code is written in Haskell. In the simplest case you need [Stack] [2] installed on your nodes of the future cluster. To reproduce the test, you don't need to know the Haskell programming language, though.
 
 ### Downloading from GitHub
 
