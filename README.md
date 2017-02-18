@@ -59,7 +59,7 @@ Here nodes 0 and 1 are located on the laptop with IP address 192.168.99.20. Node
 
 In this specific test, the first two nodes have a special meaning. The first node is a master node, which must be run strongly in the last order. The second node will be used for running a specialized local process that will play a role of the Time Server.
 
-### Building the Binary Executable
+### Building the Project
 
 For the first time, you will have to set up the Stack project. In the next time, you can skip this step.
 
