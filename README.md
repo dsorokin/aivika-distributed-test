@@ -164,7 +164,7 @@ In my case I receive the following results:
 
 It is possible thanks to the fact that the distributed simulation model uses pseudo-random generators with the predefined seed.
 
-Finally, you can launch another simulation by using the same Time Server and auxiliary nodes, i.e. the slave nodes, and running a new master node. The slave nodes should be shutdown explicitly, but they will behave like a service for each new simulation.
+Finally, on Linux and macOS you can launch another simulation by using the same Time Server and auxiliary nodes, i.e. the slave nodes, and by running a new master node. The slave nodes should be shutdown explicitly, but they will behave like a service for each new simulation. On Windows I recommend to restart all nodes for each new simulation run.
 
 [1]: http://www.aivikasoft.com/aivikasim/aivikasim-distributed  "aivikasim-distributed"
 [2]: http://docs.haskellstack.org/ "Stack"
