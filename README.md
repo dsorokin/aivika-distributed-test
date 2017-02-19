@@ -8,6 +8,8 @@ It should return the same reproducible results on computers with the same archit
 
 The test model is intentionally designed in such a way so that it would generate plenty of messages for stress testing the distributed module of AivikaSim. The most of things could be done by using significantly more efficient discrete events and discontinuous processes supported by AivikaSim, but the heavy-weight external messages are used instead. There are many rollbacks and retries, when simulating. The goal is to test the underlying mechanism that provides with capabilities of the distributed discrete event simulation based on the optimistic Time Warp method.
 
+Additionally, this model can be used for testing the AivikaSim ability to recover the distributed simulation after temporary connection errors, which is important if you are going to build a distributed simulation cluster based on ordinary cheap computers with ordinary unsafe network connections. You may even consider creating a simulation cluster connected via the Internet, but I would strongly recommend to use Linux then.
+
 ## How to Test
 
 The following test can be repeated on Windows, Linux and macOS. Possibly, it can be repeated on other operating systems too that have the Haskell compiler.
