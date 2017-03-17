@@ -1,7 +1,7 @@
 
 # A Test Distributed Simulation Model for AivikaSim
 
-This test project defines a distributed discrete event simulation model for [aivikasim-distributed] [1].
+This test project defines a distributed discrete event simulation model for [aivikasim-distributed](https://github.com/dsorokin/aivikasim-distributed) from [AivikaSim](http://www.aivikasoft.com/en/products/aivikasim.html).
 It should return the same reproducible results on computers with the same architecture whatever cluster you create.
 
 ## What is Tested
@@ -18,7 +18,7 @@ The following test can be repeated on Windows, Linux and macOS. Possibly, it can
 
 To repeat the test, you need a small simulation cluster. It can be either a single computer, i.e. `localhost`, or a true small cluster consisting of up to 4 different computers.
 
-The code is written in Haskell. In the simplest case you need [Stack] [2] installed on your nodes of the future cluster. To reproduce the test, you don't need to know the Haskell programming language, though.
+The code is written in Haskell. In the simplest case you need [Stack](http://docs.haskellstack.org/) installed on your nodes of the future cluster. To reproduce the test, you don't need to know the Haskell programming language, though.
 
 ### Downloading from GitHub
 
@@ -167,6 +167,3 @@ In my case I receive the following results:
 It is possible thanks to the fact that the distributed simulation model uses pseudo-random generators with the predefined seed.
 
 Finally, on Linux and macOS you can launch another simulation by using the same Time Server and auxiliary nodes, i.e. the slave nodes, and by running a new master node. The slave nodes should be shutdown explicitly, but they will behave like a service for each new simulation. On Windows I recommend to restart all nodes for each new simulation run.
-
-[1]: https://github.com/dsorokin/aivikasim-distributed "aivikasim-distributed"
-[2]: http://docs.haskellstack.org/ "Stack"
