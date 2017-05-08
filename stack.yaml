@@ -37,16 +37,13 @@ resolver: lts-8.0
 # will not be run. This is useful for tweaking upstream packages.
 packages:
 - location:
-   git: https://github.com/dsorokin/aivikasim.git
-   commit: HEAD
+   https://github.com/dsorokin/aivikasim/archive/v1.0.tar.gz
   extra-dep: true
 - location:
-   git: https://github.com/dsorokin/aivikasim-transformers.git
-   commit: HEAD
+   https://github.com/dsorokin/aivikasim-transformers/archive/v1.0.tar.gz
   extra-dep: true
 - location:
-   git: https://github.com/dsorokin/aivikasim-distributed.git
-   commit: HEAD
+   https://github.com/dsorokin/aivikasim-distributed/archive/v0.1.tar.gz
   extra-dep: true
 - '.'
 # Dependency packages to be pulled from upstream that are not in the resolver
