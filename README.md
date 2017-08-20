@@ -1,14 +1,14 @@
 
-# A Test Distributed Simulation Model for AivikaSim
+# A Stress-Test Distributed Simulation Model for Aivika
 
-This test project defines a distributed discrete event simulation model for [aivikasim-distributed](https://github.com/dsorokin/aivikasim-distributed) from [AivikaSim](http://www.aivikasoft.com/en/products/aivikasim.html).
+This test project defines a distributed discrete event simulation model for [aivika-distributed](http://hackage.haskell.org/package/aivika-distributed) from [Aivika](http://www.aivikasoft.com).
 It should return the same reproducible results on computers with the same architecture whatever cluster you create.
 
 ## What is Tested
 
-The test model is intentionally designed in such a way so that it would generate plenty of messages for stress testing the distributed module of AivikaSim. The most of things could be done by using significantly more efficient discrete events and discontinuous processes supported by AivikaSim, but the heavy-weight external messages are used instead. There are many rollbacks and retries, when simulating. The goal is to test the underlying mechanism that provides with capabilities of the distributed discrete event simulation based on the optimistic Time Warp method.
+The test model is intentionally designed in such a way so that it would generate plenty of messages for stress testing the distributed module of Aivika. The most of things could be done by using significantly more efficient discrete events and discontinuous processes supported by Aivika, but the heavy-weight external messages are used instead. There are many rollbacks and retries, when simulating. The goal is to test the underlying mechanism that provides with capabilities of the distributed discrete event simulation based on the optimistic Time Warp method.
 
-Additionally, this model can be used for testing the AivikaSim ability to recover the distributed simulation after temporary connection errors, which is important if you are going to build a distributed simulation cluster based on ordinary cheap computers with ordinary unsafe network connections. You may even consider creating a simulation cluster connected via the Internet, but I would strongly recommend to use Linux then.
+Additionally, this model can be used for testing the Aivika ability to recover the distributed simulation after temporary connection errors, which is important if you are going to build a distributed simulation cluster based on ordinary cheap computers with ordinary unsafe network connections. You may even consider creating a simulation cluster connected via the Internet, but I would strongly recommend to use Linux then.
 
 ## How to Test
 
@@ -25,8 +25,8 @@ The code is written in Haskell. In the simplest case you need [Stack](http://doc
 Download the test code from GitHub on all your nodes:
 
 ```
-$ git clone https://github.com/dsorokin/aivikasim-distributed-test.git
-$ cd aivikasim-distributed-test
+$ git clone https://github.com/dsorokin/aivika-distributed-test.git
+$ cd aivika-distributed-test
 ```
 
 ### Defining the Cluster Topology
@@ -77,7 +77,7 @@ It must be done on every node of the simulation cluster.
 
 Here in the test the Time Server is located on node 1. In my case I run it on the laptop with IP address 192.168.99.20.
 
-`$ stack exec aivikasim-distributed-test slave 1`
+`$ stack exec aivika-distributed-test slave 1`
 
 ### Running Auxiliary Simulation Nodes
 
@@ -85,22 +85,22 @@ Now the time is to run the auxiliary simulation nodes. In my case they are locat
 
 So, I type in one Terminal window:
 
-`$ stack exec aivikasim-distributed-test slave 2`
+`$ stack exec aivika-distributed-test slave 2`
 
 Then I repeat in another Terminal window:
 
-`$ stack exec aivikasim-distributed-test slave 3`
+`$ stack exec aivika-distributed-test slave 3`
 
 ### Launching the Simulation
 
 Now I will run the distributed simulation on my cluster. I switch to the first laptop with IP address 192.168.99.20 and type in the Terminal window:
 
-`$ stack exec aivikasim-distributed-test master 0`
+`$ stack exec aivika-distributed-test master 0`
 
 The simulation must be started, which we can see in the Terminal window, where node 1 was launched. If you remember, that was the Time Server. You should see something like this:
 
 ```
-$ stack exec aivikasim-distributed-test slave 1
+$ stack exec aivika-distributed-test slave 1
 -- time --: [INFO] Time Server: starting...
 -- time --: [DEBUG] Time Server: RegisterLocalProcessMessage pid://192.168.99.10:8081:0:24
 -- time --: [INFO] Time Server: monitoring the process by identifier pid://192.168.99.10:8081:0:24
@@ -125,7 +125,7 @@ Please pay attention to the fact that the global virtual time should increase. I
 
 ### Optional Imitating Connection Errors
 
-AivikaSim is written in such a way that it tries to recover the distributed simulation in case of connection errors. It actually allows using AivikaSim to build discrete event simulation clusters on unsafe networks.
+Aivika is written in such a way that it tries to recover the distributed simulation in case of connection errors. It actually allows using Aivika to build discrete event simulation clusters on unsafe networks.
 
 Here I use macOS with Linux and I can imitate the temporary disconnection between two my laptops. I would strongly recommend to not repeat this if you are using Windows, although you may risk.
 
@@ -134,7 +134,7 @@ So, during the simulation I plug the Ethernet cable off for about one minute. I 
 I should see something like this on the Terminal window of the master node:
 
 ```
-$ stack exec aivikasim-distributed-test master 0
+$ stack exec aivika-distributed-test master 0
 Slaves: [nid://192.168.99.20:8080:0,nid://192.168.99.10:8081:0,nid://192.168.99.10:8082:0]
 -- time --: [WARNING] Received a process monitor notification ProcessMonitorNotification (MonitorRef {monitorRefIdent = pid://192.168.99.10:8081:0:19, monitorRefCounter = 1}) pid://192.168.99.10:8081:0:19 DiedDisconnect
 -- time --: [WARNING] Received a process monitor notification ProcessMonitorNotification (MonitorRef {monitorRefIdent = pid://192.168.99.10:8082:0:19, monitorRefCounter = 2}) pid://192.168.99.10:8082:0:19 DiedDisconnect
@@ -154,7 +154,7 @@ Slaves: [nid://192.168.99.20:8080:0,nid://192.168.99.10:8081:0,nid://192.168.99.
 -- time --: [NOTICE] t = 1000.0: reconnecting to pid://192.168.99.10:8082:0:19...
 ```
 
-After plugging in the Ethernet cable, AivikaSim should recover the distributed simulation, where the global virtual time will increase again in the Terminal window of the Time Server.
+After plugging in the Ethernet cable, Aivika should recover the distributed simulation, where the global virtual time will increase again in the Terminal window of the Time Server.
 
 ### Simulation Results
 

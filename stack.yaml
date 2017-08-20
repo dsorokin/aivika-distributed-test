@@ -36,22 +36,13 @@ resolver: lts-8.0
 # non-dependency (i.e. a user package), and its test suites and benchmarks
 # will not be run. This is useful for tweaking upstream packages.
 packages:
-- location:
-   https://github.com/dsorokin/aivikasim/archive/v1.0.tar.gz
-  extra-dep: true
-- location:
-   https://github.com/dsorokin/aivikasim-transformers/archive/v1.0.tar.gz
-  extra-dep: true
-- location:
-   https://github.com/dsorokin/aivikasim-distributed/archive/v0.1.tar.gz
-  extra-dep: true
 - '.'
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps:
-- aivikasim-1.0
-- aivikasim-transformers-1.0
-- aivikasim-distributed-0.1
+- aivika-5.2
+- aivika-transformers-5.2
+- aivika-distributed-0.6
 
 # Override default flag values for local packages and extra-deps
 flags: {}
