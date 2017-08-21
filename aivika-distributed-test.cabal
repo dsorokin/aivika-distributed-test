@@ -38,7 +38,7 @@ executable aivika-distributed-test
   build-depends:       base
                      , aivika >= 5.2
                      , aivika-transformers >= 5.2
-                     , aivika-distributed >= 0.6
+                     , aivika-distributed >= 0.7
                      , aivika-distributed-test
                      , distributed-process
                      , distributed-process-simplelocalnet
