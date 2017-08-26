@@ -167,3 +167,11 @@ In my case I receive the following results:
 It is possible thanks to the fact that the distributed simulation model uses pseudo-random generators with the predefined seed.
 
 Finally, on Linux and macOS you can launch another simulation by using the same Time Server and auxiliary nodes, i.e. the slave nodes, and by running a new master node. The slave nodes should be shutdown explicitly, but they will behave like a service for each new simulation. On Windows I recommend to restart all nodes for each new simulation run.
+
+### All or Nothing
+
+Unfortunately, the logical processes cannot wait indefinitely long for each other. Therefore, the cluster has an embedded mechanism of self-destruction in case of too long connection errors. We can turn this mechanism off or tune it by specifying the timeout parameters (`tsStrategey`, `tsTimeSyncTimeout`, `dioStrategy` and `dioTimeSyncTimeout`).
+
+By default, if the time server cannot receive the modeling time information at least from any logical process for [5, 5 + 1] minutes, then the time server terminates. Similarly, if some logical process cannot receive the modeling time information from the time server for [5, 5 + 1] minutes, then that logical process terminates too. So, if some logical process shuts down, then the cluster with default settings will destroy itself in about [10, 12] minutes. 
+
+At the same time we can specify that the processes have to wait indefinitely for each other, but it is recommended to specify the timeout parameters, though. In case of need you can just set them great values.
