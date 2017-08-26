@@ -174,4 +174,4 @@ Unfortunately, the logical processes cannot wait indefinitely long for each othe
 
 By default, if the Time Server cannot receive the modeling time information, at least, from any logical process for [5, 5 + 1] minutes, then the Time Server terminates. Similarly, if some logical process cannot receive the modeling time information from the Time Server for [5, 5 + 1] minutes, then that logical process terminates too. So, if some logical process or the Time Server shuts down, then the cluster with default settings will destroy itself, at least, in about [10, 12] minutes. 
 
-At the same time we can specify that the processes have to wait indefinitely for each other, but it is recommended to specify the timeout parameters, though. In case of need you can just set them great values.
+At the same time, we can specify that the processes have to wait indefinitely for each other, but it is recommended to specify the timeout parameters, though. In case of need you can just set them great values.
