@@ -168,7 +168,7 @@ It is possible thanks to the fact that the distributed simulation model uses pse
 
 Finally, on Linux and macOS you can launch another simulation by using the same Time Server and auxiliary nodes, i.e. the slave nodes, and by running a new master node. The slave nodes should be shutdown explicitly, but they will behave like a service for each new simulation. On Windows I recommend to restart all nodes for each new simulation run.
 
-### All or Nothing
+## All or Nothing
 
 Unfortunately, the logical processes cannot wait indefinitely long for each other. Therefore, the cluster has an embedded mechanism of self-destruction in case of too long connection errors. We can turn this mechanism off or tune it by specifying the timeout parameters (`tsStrategey`, `tsTimeSyncTimeout`, `dioStrategy` and `dioTimeSyncTimeout`).
 
