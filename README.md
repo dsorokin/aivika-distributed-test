@@ -176,5 +176,5 @@ By default, if the Time Server cannot receive the modeling time information, at 
 
 At the same time, we can specify that the processes have to wait indefinitely for each other, but it is recommended to specify the timeout parameters, though. In case of need you can just set them great values.
 
-Thus, when using the default settings, the simulation will either finish returning the final result, or destruct itself exiting by exception with error code.
+Thus, when using the default settings, the simulation will either finish returning the final result, or destruct itself exiting by timeout with error code.
 
