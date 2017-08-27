@@ -172,6 +172,9 @@ Finally, on Linux and macOS you can launch another simulation by using the same 
 
 Unfortunately, the logical processes cannot wait indefinitely long for each other. Therefore, the cluster has an embedded mechanism of self-destruction in case of too long connection errors. We can turn this mechanism off or tune it by specifying the timeout parameters (`tsStrategy`, `tsTimeSyncTimeout`, `dioStrategy` and `dioTimeSyncTimeout`).
 
-By default, if the Time Server cannot receive the modeling time information, at least, from any logical process for [5, 5 + 1] minutes, then the Time Server terminates. Similarly, if some logical process cannot receive the modeling time information from the Time Server for [5, 5 + 1] minutes, then that logical process terminates too. So, if some logical process or the Time Server shuts down, then the cluster with default settings will destroy itself, at least, in about [10, 12] minutes. 
+By default, if the Time Server cannot receive the modeling time information, at least, from any logical process for 5-6 minutes, then the Time Server terminates. Similarly, if some logical process cannot receive the modeling time information from the Time Server for 5-6 minutes, then that logical process terminates too. So, if some logical process or the Time Server shuts down, then the cluster with default settings will destroy itself, at least, in about 10-12 minutes. 
 
 At the same time, we can specify that the processes have to wait indefinitely for each other, but it is recommended to specify the timeout parameters, though. In case of need you can just set them great values.
+
+Thus, when using the default settings, the simulation will either finish returning the final result, or destruct itself exiting by exception with error code.
+
