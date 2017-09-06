@@ -42,7 +42,7 @@ packages:
 extra-deps:
 - aivika-5.2
 - aivika-transformers-5.2
-- aivika-distributed-0.7.3
+- aivika-distributed-0.7.4
 
 # Override default flag values for local packages and extra-deps
 flags: {}
