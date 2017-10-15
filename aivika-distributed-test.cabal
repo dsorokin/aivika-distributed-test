@@ -36,9 +36,9 @@ executable aivika-distributed-test
   main-is:             Main.hs
   ghc-options:         -threaded -O2 -rtsopts -with-rtsopts=-N
   build-depends:       base
-                     , aivika >= 5.2
-                     , aivika-transformers >= 5.2
-                     , aivika-distributed >= 0.7.2
+                     , aivika >= 5.3
+                     , aivika-transformers >= 5.3
+                     , aivika-distributed >= 0.7.4.2
                      , aivika-distributed-test
                      , distributed-process
                      , distributed-process-simplelocalnet
