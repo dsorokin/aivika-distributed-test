@@ -40,8 +40,8 @@ packages:
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps:
-- aivika-5.4
-- aivika-transformers-5.4
+- aivika-5.5
+- aivika-transformers-5.5
 - aivika-distributed-1.0
 
 # Override default flag values for local packages and extra-deps
