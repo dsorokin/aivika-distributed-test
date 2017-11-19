@@ -101,24 +101,24 @@ The simulation must be started, which we can see in the Terminal window, where n
 
 ```
 $ stack exec aivika-distributed-test slave 1
--- time --: [INFO] Time Server: starting...
--- time --: [DEBUG] Time Server: RegisterLocalProcessMessage pid://192.168.99.10:8081:0:24
--- time --: [INFO] Time Server: monitoring the process by identifier pid://192.168.99.10:8081:0:24
--- time --: [DEBUG] Time Server: RegisterLocalProcessMessage pid://192.168.99.20:8088:0:11
--- time --: [INFO] Time Server: monitoring the process by identifier pid://192.168.99.20:8088:0:11
--- time --: [DEBUG] Time Server: RegisterLocalProcessMessage pid://192.168.99.10:8082:0:24
--- time --: [INFO] Time Server: monitoring the process by identifier pid://192.168.99.10:8082:0:24
--- time --: [INFO] Time Server: starting
--- time --: [DEBUG] Time Server: computing the global time...
--- time --: [DEBUG] Time Server: LocalTimeMessage pid://192.168.99.10:8081:0:24 0.32450531421998324
--- time --: [DEBUG] Time Server: LocalTimeMessage pid://192.168.99.20:8088:0:11 0.3245063142199832
--- time --: [DEBUG] Time Server: LocalTimeMessage pid://192.168.99.10:8082:0:24 0.0
--- time --: [INFO] Time Server: providing the global time = Just 0.0
--- time --: [DEBUG] Time Server: computing the global time...
--- time --: [DEBUG] Time Server: LocalTimeMessage pid://192.168.99.10:8082:0:24 0.40740346307920355
--- time --: [DEBUG] Time Server: LocalTimeMessage pid://192.168.99.20:8088:0:11 5.978089191143517
--- time --: [DEBUG] Time Server: LocalTimeMessage pid://192.168.99.10:8081:0:24 0.3245073142199832
--- time --: [INFO] Time Server: providing the global time = Just 0.3245073142199832
+[INFO] Time Server: starting...
+[DEBUG] Time Server: RegisterLocalProcessMessage pid://192.168.99.10:8081:0:24
+[INFO] Time Server: monitoring the process by identifier pid://192.168.99.10:8081:0:24
+[DEBUG] Time Server: RegisterLocalProcessMessage pid://192.168.99.20:8088:0:11
+[INFO] Time Server: monitoring the process by identifier pid://192.168.99.20:8088:0:11
+[DEBUG] Time Server: RegisterLocalProcessMessage pid://192.168.99.10:8082:0:24
+[INFO] Time Server: monitoring the process by identifier pid://192.168.99.10:8082:0:24
+[INFO] Time Server: starting
+[DEBUG] Time Server: computing the global time...
+[DEBUG] Time Server: LocalTimeMessage pid://192.168.99.10:8081:0:24 0.32450531421998324
+[DEBUG] Time Server: LocalTimeMessage pid://192.168.99.20:8088:0:11 0.3245063142199832
+[DEBUG] Time Server: LocalTimeMessage pid://192.168.99.10:8082:0:24 0.0
+[INFO] Time Server: providing the global time = Just 0.0
+[DEBUG] Time Server: computing the global time...
+[DEBUG] Time Server: LocalTimeMessage pid://192.168.99.10:8082:0:24 0.40740346307920355
+[DEBUG] Time Server: LocalTimeMessage pid://192.168.99.20:8088:0:11 5.978089191143517
+[DEBUG] Time Server: LocalTimeMessage pid://192.168.99.10:8081:0:24 0.3245073142199832
+[INFO] Time Server: providing the global time = Just 0.3245073142199832
 ```
 
 Please pay attention to the fact that the global virtual time should increase. It means that the distributed simulation has a progress.
@@ -136,22 +136,22 @@ I should see something like this on the Terminal window of the master node:
 ```
 $ stack exec aivika-distributed-test master 0
 Slaves: [nid://192.168.99.20:8080:0,nid://192.168.99.10:8081:0,nid://192.168.99.10:8082:0]
--- time --: [WARNING] Received a process monitor notification ProcessMonitorNotification (MonitorRef {monitorRefIdent = pid://192.168.99.10:8081:0:19, monitorRefCounter = 1}) pid://192.168.99.10:8081:0:19 DiedDisconnect
--- time --: [WARNING] Received a process monitor notification ProcessMonitorNotification (MonitorRef {monitorRefIdent = pid://192.168.99.10:8082:0:19, monitorRefCounter = 2}) pid://192.168.99.10:8082:0:19 DiedDisconnect
--- time --: [WARNING] Received a process monitor notification ProcessMonitorNotification (MonitorRef {monitorRefIdent = pid://192.168.99.20:8080:0:13, monitorRefCounter = 0}) pid://192.168.99.20:8080:0:13 DiedDisconnect
--- time --: [NOTICE] Begin reconnecting...
--- time --: [NOTICE] Direct reconnecting to pid://192.168.99.10:8081:0:19
--- time --: [NOTICE] Direct reconnecting to pid://192.168.99.10:8082:0:19
--- time --: [NOTICE] Direct reconnecting to pid://192.168.99.20:8080:0:13
--- time --: [NOTICE] Proceed to the re-monitoring
--- time --: [NOTICE] Re-monitoring pid://192.168.99.10:8081:0:19
--- time --: [NOTICE] Writing to the channel about reconnecting to pid://192.168.99.10:8081:0:19
--- time --: [NOTICE] Re-monitoring pid://192.168.99.10:8082:0:19
--- time --: [NOTICE] Writing to the channel about reconnecting to pid://192.168.99.10:8082:0:19
--- time --: [NOTICE] Re-monitoring pid://192.168.99.20:8080:0:13
--- time --: [NOTICE] Writing to the channel about reconnecting to pid://192.168.99.20:8080:0:13
--- time --: [NOTICE] t = 1000.0: reconnecting to pid://192.168.99.10:8081:0:19...
--- time --: [NOTICE] t = 1000.0: reconnecting to pid://192.168.99.10:8082:0:19...
+[WARNING] Received a process monitor notification ProcessMonitorNotification (MonitorRef {monitorRefIdent = pid://192.168.99.10:8081:0:19, monitorRefCounter = 1}) pid://192.168.99.10:8081:0:19 DiedDisconnect
+[WARNING] Received a process monitor notification ProcessMonitorNotification (MonitorRef {monitorRefIdent = pid://192.168.99.10:8082:0:19, monitorRefCounter = 2}) pid://192.168.99.10:8082:0:19 DiedDisconnect
+[WARNING] Received a process monitor notification ProcessMonitorNotification (MonitorRef {monitorRefIdent = pid://192.168.99.20:8080:0:13, monitorRefCounter = 0}) pid://192.168.99.20:8080:0:13 DiedDisconnect
+[NOTICE] Begin reconnecting...
+[NOTICE] Direct reconnecting to pid://192.168.99.10:8081:0:19
+[NOTICE] Direct reconnecting to pid://192.168.99.10:8082:0:19
+[NOTICE] Direct reconnecting to pid://192.168.99.20:8080:0:13
+[NOTICE] Proceed to the re-monitoring
+[NOTICE] Re-monitoring pid://192.168.99.10:8081:0:19
+[NOTICE] Writing to the channel about reconnecting to pid://192.168.99.10:8081:0:19
+[NOTICE] Re-monitoring pid://192.168.99.10:8082:0:19
+[NOTICE] Writing to the channel about reconnecting to pid://192.168.99.10:8082:0:19
+[NOTICE] Re-monitoring pid://192.168.99.20:8080:0:13
+[NOTICE] Writing to the channel about reconnecting to pid://192.168.99.20:8080:0:13
+[NOTICE] t = 1000.0: reconnecting to pid://192.168.99.10:8081:0:19...
+[NOTICE] t = 1000.0: reconnecting to pid://192.168.99.10:8082:0:19...
 ```
 
 After plugging in the Ethernet cable, Aivika should recover the distributed simulation, where the global virtual time will increase again in the Terminal window of the Time Server.
