@@ -178,3 +178,6 @@ At the same time, we can specify that the processes have to wait indefinitely fo
 
 Thus, when using the default settings, the distributed simulation will either finish returning the final result, or destruct itself exiting by timeout with error code.
 
+## Tuning Simulation Speed
+
+The speed of simulation essentially depends on the time horizon value defined by the `timeHorizon` constant in the beginning of the `app/Main.hs` file. For example, I could optimize the speed by using the following values. On macOS I used 100 and received the simulation that finished in 15 seconds. On Windows I used 50 and received the simulation that finished in 30 seconds only.
