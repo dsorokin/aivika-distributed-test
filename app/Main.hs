@@ -71,6 +71,9 @@ specs = Specs { spcStartTime = 0.0,
                 spcMethod = RungeKutta4,
                 spcGeneratorType = SimpleGenerator }
 
+-- | The time horizon to decrease the rollback count and improve the speed of simulation.
+timeHorizon = 100
+
 -- | The time shift when replying to the messages.
 delta = 1e-6
 
@@ -161,6 +164,8 @@ slaveModel masterId i =
        enqueueEventIOWithStopTime $
        liftIO $
        putStrLn "The sub-model finished"
+       
+     addTimeHorizonInStartTime timeHorizon
 
      runEventInStopTime $
        return ()
@@ -227,10 +232,19 @@ masterModel count =
                 fromIntegral nImmed /
                 fromIntegral n
 
+     addTimeHorizonInStartTime timeHorizon
+
      runEventInStopTime $
        do x <- upTimeProp
           y <- immedProp
           return (x, y)
+
+addTimeHorizonInStartTime :: Double -> Simulation DIO ()
+addTimeHorizonInStartTime delta =
+  do t0 <- liftParameter starttime
+     runEventInStartTime $
+       enqueueEventIOWithTimes [t0, (t0 + delta) ..] $
+       return ()
 
 runSlaveModel :: (DP.ProcessId, DP.ProcessId, Int) -> DP.Process (DP.ProcessId, DP.Process ())
 runSlaveModel (timeServerId, masterId, i) =
