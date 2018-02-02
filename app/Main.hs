@@ -164,8 +164,6 @@ slaveModel masterId i =
        enqueueEventIOWithStopTime $
        liftIO $
        putStrLn "The sub-model finished"
-       
-     addTimeHorizonInStartTime timeHorizon
 
      runEventInStopTime $
        return ()
@@ -232,25 +230,17 @@ masterModel count =
                 fromIntegral nImmed /
                 fromIntegral n
 
-     addTimeHorizonInStartTime timeHorizon
-
      runEventInStopTime $
        do x <- upTimeProp
           y <- immedProp
           return (x, y)
-
-addTimeHorizonInStartTime :: Double -> Simulation DIO ()
-addTimeHorizonInStartTime delta =
-  do t0 <- liftParameter starttime
-     runEventInStartTime $
-       enqueueEventIOWithTimes [t0, (t0 + delta) ..] $
-       return ()
 
 runSlaveModel :: (DP.ProcessId, DP.ProcessId, Int) -> DP.Process (DP.ProcessId, DP.Process ())
 runSlaveModel (timeServerId, masterId, i) =
   runDIO m ps timeServerId
   where
     ps = defaultDIOParams { dioLoggingPriority = NOTICE,
+                            dioTimeHorizon = Just timeHorizon,
                             dioProcessMonitoringEnabled = True,
                             dioProcessReconnectingEnabled = True }
     m  = do registerDIO
@@ -272,6 +262,7 @@ runMasterModel timeServerId n =
   runDIO m ps timeServerId
   where
     ps = defaultDIOParams { dioLoggingPriority = NOTICE,
+                            dioTimeHorizon = Just timeHorizon,
                             dioProcessMonitoringEnabled = True,
                             dioProcessReconnectingEnabled = True }
     m  = do registerDIO
