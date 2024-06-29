@@ -2,11 +2,9 @@ name:                aivika-distributed-test
 version:             0.1.0.0
 synopsis:            A stress-test distributed simulation model for Aivika
 description:
-    This stress-test project defines a distributed discrete event simulation model for Aivika [1]. 
+    This stress-test project defines a distributed discrete event simulation model for Aivika. 
     It should return the same reproducible results on computers with the same architecture
     whatever cluster you create.
-    .
-    \[1] <http://www.aivikasoft.com>
     .
 homepage:            https://github.com/dsorokin/aivika-distributed-test#readme
 license:             BSD3

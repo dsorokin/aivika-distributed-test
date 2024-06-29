@@ -1,7 +1,7 @@
 
 # A Stress-Test Distributed Simulation Model for Aivika
 
-This test project defines a distributed discrete event simulation model for [aivika-distributed](http://hackage.haskell.org/package/aivika-distributed) from [Aivika](http://www.aivikasoft.com).
+This test project defines a distributed discrete event simulation model for [aivika-distributed](http://hackage.haskell.org/package/aivika-distributed).
 It should return the same reproducible results on computers with the same architecture whatever cluster you create.
 
 ## What is Tested
